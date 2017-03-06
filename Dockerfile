@@ -1,6 +1,10 @@
 FROM mjmg/centos-mro-base:latest
 
 RUN \
+  yum update -y  && \
+  yum upgrade -y
+
+RUN \
   yum install -y unzip netcdf-devel libxml2-devel ImageMagick graphviz cairo-devel libXt-devel 
 
 # Install Metaboanalyst R package prerequisites "Rserve", "ellipse", "scatterplot3d","pls", "caret", "multicore", "lattice", "Cairo", 
@@ -54,7 +58,7 @@ ENV GLASSFISH_PKG http://download.java.net/glassfish/4.1.1/release/glassfish-4.1
 ENV PKG_FILE_NAME glassfish-4.1.1.zip
 
 #From https://github.com/glassfish/docker/blob/master/oracle-jdk/Dockerfile
-RUN \  
+RUN \
   useradd -b /opt -m -s /bin/bash glassfish && echo glassfish:glassfish | chpasswd
 RUN \
   cd /opt/glassfish && curl -O $GLASSFISH_PKG && unzip $PKG_FILE_NAME && rm $PKG_FILE_NAME
@@ -62,13 +66,10 @@ RUN \
 # Get webapp
 RUN \
   cd /opt/glassfish && curl -O https://dl.dropboxusercontent.com/u/95163184/MetaboAnalyst.war
-  
-  
+
 RUN \
-  chown -R glassfish:glassfish /opt/glassfish* 
-  
-# Default glassfish ports
-EXPOSE 4848 8009 8080 8181
+  chown -R glassfish:glassfish /opt/glassfish*
+
 
 # Set glassfish user in its home/bin by default
 USER glassfish
@@ -86,6 +87,9 @@ RUN \
   ./asadmin stop-domain
 
 USER root
+
+# Default glassfish ports
+EXPOSE 4848 8009 8080 8181
 
 # Add supervisor conf files
 ADD \
