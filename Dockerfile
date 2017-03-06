@@ -89,7 +89,7 @@ RUN \
 USER root
 
 # Default glassfish ports
-EXPOSE 4848 8009 8080 8181
+EXPOSE 4848 8009 8080 8181 9001
 
 # Add supervisor conf files
 ADD \
