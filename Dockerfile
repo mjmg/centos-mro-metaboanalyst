@@ -65,7 +65,7 @@ RUN \
 
 # Get webapp
 RUN \
-  cd /opt/glassfish && curl -O https://dl.dropboxusercontent.com/u/95163184/MetaboAnalyst.war
+  cd /opt/glassfish && curl -O https://dl.dropboxusercontent.com/s/0jfimv1v5wr2hsw/MetaboAnalyst-3.97.war
 
 RUN \
   chown -R glassfish:glassfish /opt/glassfish*
