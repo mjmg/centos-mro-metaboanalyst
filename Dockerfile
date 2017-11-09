@@ -82,7 +82,7 @@ RUN echo "AS_ADMIN_PASSWORD=glassfish" > pwdfile
 # Default to admin/glassfish as user/pass
 RUN \
   ./asadmin start-domain && \
-  ./asadmin --user admin --passwordfile pwdfile deploy  /opt/glassfish/MetaboAnalyst.war && \
+  ./asadmin --user admin --passwordfile pwdfile deploy  /opt/glassfish/MetaboAnalyst-3.97.war && \
   ./asadmin --user admin --passwordfile pwdfile enable-secure-admin && \
   ./asadmin stop-domain
 
