@@ -1,5 +1,7 @@
 FROM mjmg/centos-mro-base:latest
 
+ENV METABOANALYST_WAR_URL https://dl.dropboxusercontent.com/s/klbtvns5z0cr6mv/MetaboAnalyst-3.98.war
+
 RUN \
   yum update -y  && \
   yum upgrade -y
@@ -65,7 +67,7 @@ RUN \
 
 # Get webapp
 RUN \
-  cd /opt/glassfish && curl -o MetaboAnalyst.war https://dl.dropboxusercontent.com/s/0jfimv1v5wr2hsw/MetaboAnalyst-3.97.war
+  cd /opt/glassfish && curl -o MetaboAnalyst.war $METABOANALYST_WAR_URL
 
 RUN \
   chown -R glassfish:glassfish /opt/glassfish*
