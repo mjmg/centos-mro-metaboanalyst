@@ -1,6 +1,7 @@
 FROM mjmg/centos-mro-base:latest
 
-ENV METABOANALYST_WAR_URL https://dl.dropboxusercontent.com/s/klbtvns5z0cr6mv/MetaboAnalyst-3.98.war
+ENV METABOANALYST_VERSION 3.98
+ENV METABOANALYST_WAR_URL https://dl.dropboxusercontent.com/s/klbtvns5z0cr6mv/MetaboAnalyst-$METABOANALYST_VERSION.war
 
 RUN \
   yum update -y  && \
@@ -90,8 +91,14 @@ RUN \
 
 USER root
 
-# Default glassfish ports
-EXPOSE 4848 8009 8080 8181 9001
+# Default Glassfish Ports
+EXPOSE 4848 8009 
+
+# MetaboAnalyst Ports
+EXPOSE 8080 8181 
+
+# HTTP Supervisor Port
+EXPOSE 9001
 
 # Add supervisor conf files
 ADD \
